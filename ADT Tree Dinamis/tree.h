@@ -13,7 +13,7 @@
 #include <stdbool.h>
 
 
-typedef struct nbTreeNode *nbAddr;
+typedef struct nbTreeNode *address;
 
 typedef struct  { 
   char jabatan[50];
@@ -21,43 +21,48 @@ typedef struct  {
 } nbType;
 
 typedef struct { 
-  nbType root; 
+  address root; 
 } nbTree;
 
 typedef struct nbTreeNode{
-  nbAddr parent;
-  nbAddr firstChild; 
-  nbAddr nextBrother; 
+  address parent;
+  address firstChild; 
+  address nextBrother; 
   nbType data;
 }ElmtTree;
 
 /* ---------------- Konstruktor Tree ---------------- */
-void initTree(nbAddr *x);
+void initTree(nbTree *x);
 //Membuat tree kosong (X.root=NULL)
 
+void CreateTree(nbTree *T, nbType data);
+//Membuat tree dengan root data
+
 /* ---------------- Alokasi node baru Tree ---------------- */
-nbAddr initNode(nbType X);
+address initNode(nbType X);
 //Alokasi untuk membuat node baru
 
 /* ---------------- Operasi-operasi Tree ---------------- */
-nbAddr InsertNode(nbAddr *tRoot, nbAddr parent, nbType X);
-// Menambah element pada node parent
+void addChild(address *Root, nbType data);
+// Menambah element sebagai child dari parent Root
 
-nbAddr SearchNode(nbAddr root, nbType src);
-// Mencari node dengan info ttn dan mengembalikan addressnya
+void addSibling(address *Root, nbType data);
+// Menambah element sebagai sibling dari node Root
 
-int Depth(nbAddr root);
-// Mengukur kedalaman suatu node dari root
+void findChild(address Root);
+//Mencari child dari node Root
 
+void findParent(address Root);
+//Mencari parent dari node Root
 
-/* ---------------- TRAVERSAL Tree ---------------- */
-void nbPost(nbAddr root); // Postorder traversing
-void nbPre(nbAddr root); // Preorder traversing
-//void nbIn(nbAddr root); // Inorder traversing
-void nbLevelOrder(nbAddr root,int curLevel, int desLevel); // Levelorder traversing
+void findGrandParent(address Root);
+//Mencari grandparent dari node Root
+address Search(address root, char* src);
+//Mencari data pada tree
 
 /* ---------------- PRINT TREE ---------------- */
-void nbPrint(nbAddr node, char tab[]);
+void PrintPreOrder(address root);
+
 
 #endif
 
